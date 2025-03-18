@@ -7,8 +7,8 @@ function cfi_display(s, domain)
     % cfi_display(s, domain)
 
     % Check if the input is a struct
-    if ~isstruct(s) && (~isfield(s, 'imageData') || ~isfield(s, 'fileNameData'))
-        error('Input must be a struct');
+    if ~isstruct(s) || ~isfield(s, 'imageData') || ~isfield(s, 'fileNameData')
+        error('Input must be a struct with fields imageData and fileNameData');
     end
     % Check if the domain argument is provided
     if nargin < 2 || isempty(domain)
@@ -39,12 +39,14 @@ function cfi_display(s, domain)
         colormap('gray');
         title('Frequency Domain');
         colorbar;
+
+        disp('Frequency Domain Image displayed');
     else
         % Display the spatial domain image
         figure;
         imshow(image);
         title('Spatial Domain');
-    end
 
-    disp('Image displayed successfully');
+        disp('Spatial Domain Image displayed');
+    end
 end

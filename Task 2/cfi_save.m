@@ -9,8 +9,8 @@ function cfi_save(filename, s)
     if ~ischar(filename)
         error('Input must be a string');
     end
-    if ~isstruct(s) && (~isfield(s, 'imageData') || ~isfield(s, 'fileNameData'))
-        error('Input must be a struct');
+    if ~isstruct(s) || ~isfield(s, 'imageData') || ~isfield(s, 'fileNameData')
+        error('Input must be a valid struct');
     end
 
     % Check if the file already exists
@@ -26,6 +26,4 @@ function cfi_save(filename, s)
         % Display an error message if the file format is invalid
         error('File is in invalid format');
     end
-
-    disp('File saved successfully');
 end
